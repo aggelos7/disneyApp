@@ -11,8 +11,8 @@ export class ApiService {
 
   constructor(private _httpClient: HttpClient) { }
 
-  getDirectById(): Observable<any> {
-    return this._httpClient.get(this.baseUrl + `/character`).pipe(
+  getCharacters(page: number, pageSize: number): Observable<any> {
+    return this._httpClient.get(this.baseUrl + `/character?page=${page}&pageSize=${pageSize}`).pipe(
         map((res: any) => {
             return res;
         }),

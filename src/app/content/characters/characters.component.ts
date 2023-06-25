@@ -9,13 +9,15 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class CharactersComponent {
   dataSource = new MatTableDataSource<any>();
+  info: any;
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.apiService.getDirectById().subscribe((res: any) => {
+    this.apiService.getCharacters(0,50).subscribe((res: any) => {
       console.log(res);
       this.dataSource.data = res.data;
+      this.info = res.info;
     });
   }
 }
