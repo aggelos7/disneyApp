@@ -26,7 +26,6 @@ export class DatatableComponent implements AfterViewInit {
   }
 
   handlePageEvent(event: PageEvent): void {
-    console.log(event);
     this.event.emit(event);
   }
 
