@@ -9,17 +9,23 @@ import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './content/main/main.component';
 import { CharactersComponent } from './content/characters/characters.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatatableComponent } from './shared/components/datatable/datatable.component';
+import { PieChartComponent } from './shared/components/pie-chart/pie-chart.component';
+import { SharedModule } from './shared/shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    CharactersComponent
+    CharactersComponent,
+    DatatableComponent,
+    PieChartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    SharedModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     BrowserAnimationsModule
