@@ -9,15 +9,23 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class CharactersComponent {
   dataSource = new MatTableDataSource<any>();
-  info: any;
+  total: number;
 
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.apiService.getCharacters(0,50).subscribe((res: any) => {
-      console.log(res);
+    this.getCharacters(0, 50);
+  }
+
+  test(event){
+    console.log(event);
+    // this.getCharacters(event.pageIndex, event.pageSize);
+  }
+
+  getCharacters(page: number, pageSize: number): void {
+    this.apiService.getCharacters(page + 1, pageSize).subscribe((res: any) => {
       this.dataSource.data = res.data;
-      this.info = res.info;
+      this.total = res.info.count * res.info.totalPages;
     });
   }
 }

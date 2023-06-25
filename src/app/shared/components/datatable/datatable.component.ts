@@ -1,5 +1,6 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -10,19 +11,23 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class DatatableComponent implements AfterViewInit {
   @Input() dataSource: MatTableDataSource<any>;
-  @Input() info: any;
+  @Input() total: number;
+  @Output() event = new EventEmitter<PageEvent>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['name', 'tvShows', 'videoGames', 'allies', 'enemies'];
   pageSize = 50;
   pageIndex = 0;
 
-  
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   handlePageEvent(event: PageEvent): void {
     console.log(event);
+    this.event.emit(event);
   }
 
 }

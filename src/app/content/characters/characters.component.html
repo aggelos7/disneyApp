@@ -1,6 +1,6 @@
 <div class="my-4">
     <h4>Characters</h4>
-    <app-datatable [dataSource]="dataSource" [info]="info"></app-datatable>
+    <app-datatable [dataSource]="dataSource" [total]="total" (event)="test($event)"></app-datatable>
 </div>
 <div class="my-4">
     <h3>Pie Chart</h3>
