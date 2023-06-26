@@ -31,13 +31,11 @@ export class CharactersComponent {
   }
 
   applyFilter(column: string, value: string) {
-    console.log(column, value)
     value = value.trim(); // Remove whitespace
     value = value.toLowerCase(); // Convert to lowercase
   
     this.dataSource.filterPredicate = (data: any, filter: string) => {
       const columnValue = data[column].toString().toLowerCase();
-      console.log(columnValue, filter)
       return columnValue.includes(filter);
     };
   
