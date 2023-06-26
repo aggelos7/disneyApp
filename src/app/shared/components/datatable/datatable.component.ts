@@ -39,6 +39,7 @@ export class DatatableComponent implements AfterViewInit {
         character: row,
       },
       width: '300px',
+      autoFocus: false,
     });
   }
 

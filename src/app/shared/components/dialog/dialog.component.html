@@ -1,7 +1,13 @@
+<button mat-icon-button mat-dialog-close class="float-right cursor-pointer" (click)="closeDialog()">
+    <mat-icon>close</mat-icon>
+</button>
 <div class="p-8">
-    <div>{{character.name}}</div>
-    <div>
+    <div class="text-lg font-medium">{{character.name}}</div>
+    <div class="pt-3">
         <img *ngIf="character.imageUrl" [alt]="character.name" class="object-cover w-full h-full bg-neutral-800" [src]="character.imageUrl">
     </div>
-    <div>test</div>
+    <div class="pt-3">
+        <app-list *ngIf="character.tvShows.length" [items]="character.tvShows" [title]="'TV Shows'"></app-list>
+        <app-list *ngIf="character.videoGames.length" [items]="character.videoGames" [title]="'Video Games'"></app-list>
+    </div>
 </div>

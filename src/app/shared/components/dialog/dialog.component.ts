@@ -17,7 +17,10 @@ export class DialogComponent {
 
   ngOnInit(): void {
     this.character = this.data.character;
-    console.log(this.character)
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
   }
 
 }
