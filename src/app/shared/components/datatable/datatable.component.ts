@@ -4,6 +4,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogComponent } from '../dialog/dialog.component';
+import { Character } from '../../models/character';
 
 @Component({
   selector: 'app-datatable',
@@ -32,13 +33,12 @@ export class DatatableComponent implements AfterViewInit {
     this.event.emit(event);
   }
 
-  openDialog(row: any): void {
+  openDialog(row: Character): void {
     this.dialog.open(DialogComponent, {
       data: {
         character: row,
       },
-      width: '600px',
-      panelClass: 'direct-message-dialog'
+      width: '300px',
     });
   }
 

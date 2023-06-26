@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Character } from '../../models/character';
 
 @Component({
   selector: 'app-dialog',
@@ -7,6 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent {
+  character: Character;
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -14,7 +16,8 @@ export class DialogComponent {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data)
+    this.character = this.data.character;
+    console.log(this.character)
   }
 
 }
