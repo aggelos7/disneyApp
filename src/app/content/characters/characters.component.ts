@@ -17,9 +17,8 @@ export class CharactersComponent {
     this.getCharacters(0, 50);
   }
 
-  test(event){
-    console.log(event);
-    // this.getCharacters(event.pageIndex, event.pageSize);
+  test(event) {
+    this.getCharacters(event.pageIndex, event.pageSize);
   }
 
   getCharacters(page: number, pageSize: number): void {
