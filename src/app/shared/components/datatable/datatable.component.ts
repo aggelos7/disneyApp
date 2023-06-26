@@ -1,7 +1,9 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-datatable',
@@ -19,6 +21,8 @@ export class DatatableComponent implements AfterViewInit {
   pageSize = 50;
   pageIndex = 0;
 
+  constructor(private dialog: MatDialog) { }
+
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
@@ -26,6 +30,16 @@ export class DatatableComponent implements AfterViewInit {
 
   handlePageEvent(event: PageEvent): void {
     this.event.emit(event);
+  }
+
+  openDialog(row: any): void {
+    this.dialog.open(DialogComponent, {
+      data: {
+        character: row,
+      },
+      width: '600px',
+      panelClass: 'direct-message-dialog'
+    });
   }
 
 }
