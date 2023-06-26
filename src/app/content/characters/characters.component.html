@@ -1,5 +1,7 @@
 <div class="my-4">
     <h4>Characters</h4>
+    <input [(ngModel)]="searchQuery['name']" (input)="applyFilter('name', searchQuery['name'])" placeholder="Name" />
+    <input [(ngModel)]="searchQuery['tvShows']" (input)="applyFilter('tvShows', searchQuery['tvShows'])" placeholder="TV Shows" />
     <app-datatable [dataSource]="dataSource" [total]="total" (event)="test($event)"></app-datatable>
 </div>
 <div class="my-4">
