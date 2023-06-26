@@ -17,6 +17,7 @@ export class CharactersComponent {
 
   ngOnInit(): void {
     this.getCharacters(0, 50);
+    console.log('test')
   }
 
   test(event) {
