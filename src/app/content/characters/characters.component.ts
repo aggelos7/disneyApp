@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { Character } from 'src/app/shared/models/character';
 import { Pagination } from 'src/app/shared/models/pagination';
-import { newPagination } from 'src/app/store/app.actions';
+import { AppState } from 'src/app/store/app.selectors';
 
 @Component({
   selector: 'app-characters',
@@ -18,17 +18,18 @@ export class CharactersComponent {
   total: number;
   searchQuery: { [key: string]: string } = {};
 
-
+  
   constructor(
     private apiService: ApiService,
     private store: Store<{ appState: Pagination }>
-    ) { }
+  ) { }
+
 
   ngOnInit(): void {
-    this.store.select('appState').subscribe((res: Pagination) => {
+    this.store.select(AppState).subscribe((res: Pagination) => {
       this.getCharacters(res.page, res.pageSize);
     })
-    
+
   }
 
   getCharacters(page: number, pageSize: number): void {
@@ -36,7 +37,7 @@ export class CharactersComponent {
       const totalFilms = res.data.reduce((acc: number, character: Character) => {
         return acc + character.films.length;
       }, 0);
-  
+
       const pieChartData = res.data.map((character: Character) => {
         return {
           name: character.name,
