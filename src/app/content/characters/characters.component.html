@@ -4,6 +4,6 @@
         <app-datatable [dataSource]="dataSource" [total]="total" (event)="fetchNewPage($event)"></app-datatable>
     </div>
     <div class="my-4 flex-1">
-        <app-pie-chart></app-pie-chart>
+        <app-pie-chart *ngIf="pieChartData$ | async as pieChartData" [data]="pieChartData"></app-pie-chart>
     </div>
 </div>

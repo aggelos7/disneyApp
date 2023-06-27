@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Observable, of } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
+import { Character } from 'src/app/shared/models/character';
 
 @Component({
   selector: 'app-characters',
@@ -9,6 +11,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class CharactersComponent {
   dataSource = new MatTableDataSource<any>();
+  pieChartData$: Observable<any>;
   total: number;
   searchQuery: { [key: string]: string } = {};
 
@@ -25,6 +28,18 @@ export class CharactersComponent {
 
   getCharacters(page: number, pageSize: number): void {
     this.apiService.getCharacters(page + 1, pageSize).subscribe((res: any) => {
+      const totalFilms = res.data.reduce((acc: number, character: Character) => {
+        return acc + character.films.length;
+      }, 0);
+  
+      const pieChartData = res.data.map((character: Character) => {
+        return {
+          name: character.name,
+          y: character.films.length / totalFilms * 100,
+          x: character.films
+        }
+      });
+      this.pieChartData$ = of(pieChartData)
       this.dataSource.data = res.data;
       this.total = res.info.count * res.info.totalPages;
     });

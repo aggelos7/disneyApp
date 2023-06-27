@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import * as Highcharts from 'highcharts';
 import HighchartsExporting from 'highcharts/modules/exporting';
 import HighchartsExportData from 'highcharts/modules/export-data';
@@ -12,32 +12,32 @@ HighchartsExportData(Highcharts);
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PieChartComponent {
-  ngOnInit() {
-    Highcharts.chart('chart-container', chartOptions);
+  @Input() data: any;
+  chartOptions: any = {
+    chart: {
+      type: 'pie',
+    },
+    title: {
+      text: 'Pie Chart',
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br/>Films List:<br/> {point.x}'
+    },
+    accessibility: {
+      point: {
+        valueSuffix: '%'
+      }
+    },
+    series: [
+      {
+        name: 'Percentage',
+        colorByPoint: true
+      }
+    ],
+  };
+
+  ngOnChanges() {
+    this.chartOptions.series[0].data = this.data;
+    Highcharts.chart('chart-container', this.chartOptions);
   }
 }
-
-const chartOptions: any = {
-  chart: {
-    type: 'pie',
-  },
-  title: {
-    text: 'Pie Chart',
-  },
-  series: [
-    {
-      name: 'Brands',
-      colorByPoint: true,
-      data: [
-        {
-          name: 'Chrome',
-          y: 61.41,
-        },
-        {
-          name: 'Internet Explorer',
-          y: 11.84,
-        },
-      ]
-    }
-  ],
-};
