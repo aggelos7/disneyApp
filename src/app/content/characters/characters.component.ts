@@ -30,15 +30,22 @@ export class CharactersComponent {
     });
   }
 
-  applyFilter(column: string, value: string) {
-    value = value.trim(); // Remove whitespace
-    value = value.toLowerCase(); // Convert to lowercase
-  
-    this.dataSource.filterPredicate = (data: any, filter: string) => {
-      const columnValue = data[column].toString().toLowerCase();
-      return columnValue.includes(filter);
-    };
-  
-    this.dataSource.filter = value;
+  applyFilter(event) {
+    console.log(event)
+    let value = event.value;
+
+    if (value) {
+      value = value.trim(); // Remove whitespace
+      value = value.toLowerCase(); // Convert to lowercase
+      this.dataSource.filterPredicate = (data: any, filter: string) => {
+        const columnValue = data[event.column].toString().toLowerCase();
+        return columnValue.includes(filter);
+      };
+
+      this.dataSource.filter = value;
+    } else {
+      this.dataSource.filter = '';
+    }
+
   }
 }

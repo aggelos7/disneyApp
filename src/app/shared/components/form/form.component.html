@@ -1,0 +1,17 @@
+<form class="flex flex-row gap-3" [formGroup]="form" (ngSubmit)="applyFilter()">
+
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name"  (focus)="clearInput('tvShows')">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>TV Shows</mat-label>
+        <input matInput formControlName="tvShows"  (focus)="clearInput('name')">
+    </mat-form-field>
+
+    <div class="flex gap-3 ml-5 items-center mb-2">
+        <button mat-flat-button color="primary">Search</button>
+        <button type="button" mat-stroked-button color="link" (click)="clearForm()">Clear</button>
+    </div>
+</form>
