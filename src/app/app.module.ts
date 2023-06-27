@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './content/main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { appReducer } from './store/app.reducer';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({
+      appState: appReducer,
+    }),
     EffectsModule.forRoot([]),
     BrowserAnimationsModule
   ],

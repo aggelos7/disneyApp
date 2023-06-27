@@ -5,6 +5,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogComponent } from '../dialog/dialog.component';
 import { Character } from '../../models/character';
+import { Pagination } from '../../models/pagination';
+import { Store } from '@ngrx/store';
+import { newPagination } from 'src/app/store/app.actions';
 
 @Component({
   selector: 'app-datatable',
@@ -15,14 +18,16 @@ import { Character } from '../../models/character';
 export class DatatableComponent implements AfterViewInit {
   @Input() dataSource: MatTableDataSource<any>;
   @Input() total: number;
-  @Output() event = new EventEmitter<PageEvent>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['name', 'tvShows', 'videoGames', 'allies', 'enemies'];
   pageSize = 50;
   pageIndex = 0;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog,
+    private store: Store<{ appState: Pagination }>
+  ) { }
 
 
   ngAfterViewInit() {
@@ -30,7 +35,7 @@ export class DatatableComponent implements AfterViewInit {
   }
 
   handlePageEvent(event: PageEvent): void {
-    this.event.emit(event);
+    this.store.dispatch(newPagination({ page: event.pageIndex, pageSize: event.pageSize }));
   }
 
   openDialog(row: Character): void {

@@ -1,7 +1,7 @@
 <div class="flex flex-row gap-3">
     <div class="my-4 flex-1">
         <app-form (searchQuery)="applyFilter($event)"></app-form>
-        <app-datatable [dataSource]="dataSource" [total]="total" (event)="fetchNewPage($event)"></app-datatable>
+        <app-datatable [dataSource]="dataSource" [total]="total"></app-datatable>
     </div>
     <div class="my-4 flex-1">
         <app-pie-chart *ngIf="pieChartData$ | async as pieChartData" [data]="pieChartData"></app-pie-chart>

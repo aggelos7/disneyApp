@@ -21,7 +21,7 @@ export class PieChartComponent {
       text: 'Pie Chart',
     },
     tooltip: {
-      pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b><br/>Films List:<br/> {point.x}'
+      pointFormat: '<b>{series.name}</b>: {point.percentage:.1f}%<br/><b>Films List</b>:<br/> {point.x}'
     },
     accessibility: {
       point: {

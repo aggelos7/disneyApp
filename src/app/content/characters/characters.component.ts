@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 import { Character } from 'src/app/shared/models/character';
+import { Pagination } from 'src/app/shared/models/pagination';
+import { newPagination } from 'src/app/store/app.actions';
 
 @Component({
   selector: 'app-characters',
@@ -16,14 +19,16 @@ export class CharactersComponent {
   searchQuery: { [key: string]: string } = {};
 
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private store: Store<{ appState: Pagination }>
+    ) { }
 
   ngOnInit(): void {
-    this.getCharacters(0, 50);
-  }
-
-  fetchNewPage(event) {
-    this.getCharacters(event.pageIndex, event.pageSize);
+    this.store.select('appState').subscribe((res: Pagination) => {
+      this.getCharacters(res.page, res.pageSize);
+    })
+    
   }
 
   getCharacters(page: number, pageSize: number): void {
@@ -46,7 +51,6 @@ export class CharactersComponent {
   }
 
   applyFilter(event) {
-    console.log(event)
     let value = event.value;
 
     if (value) {
