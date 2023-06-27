@@ -1,8 +1,9 @@
-<div class="my-4">
-    <app-form (searchQuery)="applyFilter($event)"></app-form>
-    <app-datatable [dataSource]="dataSource" [total]="total" (event)="fetchNewPage($event)"></app-datatable>
-</div>
-<div class="my-4">
-    <h3>Pie Chart</h3>
-    <app-pie-chart></app-pie-chart>
+<div class="flex flex-row gap-3">
+    <div class="my-4 flex-1">
+        <app-form (searchQuery)="applyFilter($event)"></app-form>
+        <app-datatable [dataSource]="dataSource" [total]="total" (event)="fetchNewPage($event)"></app-datatable>
+    </div>
+    <div class="my-4 flex-1">
+        <app-pie-chart></app-pie-chart>
+    </div>
 </div>
