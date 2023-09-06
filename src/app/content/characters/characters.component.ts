@@ -29,7 +29,7 @@ export class CharactersComponent {
     this.store.select(AppState).subscribe((res: Pagination) => {
       this.getCharacters(res.page, res.pageSize);
     })
-
+    console.log('test');
   }
 
   getCharacters(page: number, pageSize: number): void {
